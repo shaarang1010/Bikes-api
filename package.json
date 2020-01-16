@@ -1,0 +1,26 @@
+{
+  "name": "bike-api",
+  "version": "1.0.0",
+  "description": "An REST API to display list of bikes and their information",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon .",
+    "test": "npm test"
+  },
+  "keywords": [
+    "Bike-api",
+    "Bikes"
+  ],
+  "author": "Shaarang Tanpure",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.0",
+    "mongoose": "^5.8.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
