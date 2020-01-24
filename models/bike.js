@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const BikeSchema = new Schema({
+const bikeSchema = new Schema({
     _updateID: {
         type: Schema.Types.ObjectId,
     },
@@ -20,11 +20,13 @@ const BikeSchema = new Schema({
     },
     image: {
         type: String,
-        trim: true
+        trim: true,
+        default: ''
     },
     category: {
         type: String,
         index: true,
+        default: 'road',
         required: true,
         trim: true
     },
@@ -34,10 +36,37 @@ const BikeSchema = new Schema({
         index: true,
         trim: true
     }
-}, {
+},
+{
+    writeConcern: {
+        w: 'majority',
+        j: true,
+        wtimeout: 1000
+}
+},
+{
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
-});
+},
+);
 
-module.exports = mongoose.model('Bikes', BikeSchema);
 
+bikeSchema.statics.getBikes = function(){
+    return new Promise((resolve, reject) => {
+        this.find((err, data)=>{
+            if(err){
+                console.error(err);
+                return reject(err);
+            }
+
+            resolve(data);
+        })
+    })
+}
+
+/*bikeSchema.statics.upload = function(data){
+    return BikeList.insert(data, {ordered:false})
+}*/
+
+
+module.exports = mongoose.model('BikeList', bikeSchema);

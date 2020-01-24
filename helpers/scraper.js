@@ -2,7 +2,11 @@ const cheerio = require('cheerio');
 
 const fs = require('fs');
 
-const scrapePage = (arg, elem) =>{
+const bikesController = require('../controller/bikeController');
+
+const Bikes = require('../models/bike');
+
+const scrapePage = async (arg, elem) =>{
     const $ = cheerio.load(arg);
 
     const elements = $(elem);
@@ -21,18 +25,30 @@ const scrapePage = (arg, elem) =>{
             let data = {
                 'bikeTitle': element.attribs['title'],
                 'bikeBrand': element.attribs['data-brand'],
-                'category': element.attribs['data-category-name'],
                 'price': parseFloat(element.attribs['data-price'])
             }
-            console.log(element.attribs);
             const imgFile = $(findEle).find('img.product-tile__image.lazyload');
             data['image'] = imgFile[0].attribs['data-src']; 
-            console.log(imgFile[0].attribs['data-src']);
+            //console.log(imgFile[0].attribs['data-src']);
             bikes.push(data);
         }
     }
     console.log("BIKES -------------- ");
-    console.log(bikes);
+    //console.log(bikes.length);
+    try{
+    const result = await Bikes.insertMany(bikes,{ writeConcern: { w: 2, j: true, wtimeout: 5000 } });
+
+    console.log(result);
+    /*result.then(data=>{
+        console.log(data);
+    })
+    .catch(err=>{
+        console.log(err);
+    })*/
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 module.exports.scrapePage = scrapePage;
