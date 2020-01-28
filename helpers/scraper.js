@@ -6,7 +6,12 @@ const bikesController = require('../controller/bikeController');
 
 const Bikes = require('../models/bike');
 
-const scrapePage = async (arg, elem) =>{
+
+const cleanString = (string) =>{
+    return string.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+}
+
+const scrapePage = (arg, elem) =>{
     const $ = cheerio.load(arg);
 
     const elements = $(elem);
@@ -23,8 +28,10 @@ const scrapePage = async (arg, elem) =>{
         }
         if(element){
             let data = {
-                'bikeTitle': element.attribs['title'],
+                'bikeTitle': cleanString(element.attribs['title']),
                 'bikeBrand': element.attribs['data-brand'],
+                'category': 'mountain',
+                'subCategory': cleanString(element.attribs['data-category-name']),
                 'price': parseFloat(element.attribs['data-price'])
             }
             const imgFile = $(findEle).find('img.product-tile__image.lazyload');
@@ -36,9 +43,10 @@ const scrapePage = async (arg, elem) =>{
     console.log("BIKES -------------- ");
     //console.log(bikes.length);
     try{
-    const result = await Bikes.insertMany(bikes,{ writeConcern: { w: 2, j: true, wtimeout: 5000 } });
-
-    console.log(result);
+    //const result = await Bikes.insertMany(bikes,{ writeConcern: { w: 2, j: true, wtimeout: 5000 } });
+    
+    console.log(bikes);
+    //console.log(result);
     /*result.then(data=>{
         console.log(data);
     })
