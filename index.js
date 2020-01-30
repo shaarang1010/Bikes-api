@@ -23,7 +23,7 @@ db.connectDB(`${process.env.CONNECTION_URL}`).then(async ()=>{
         }
         console.log(`${process.env.DATABASE_NAME}`);
         console.log(`Server listening on port -> ${process.env.PORT}`);
-        //scrape.scrapePage().then((data=>{})).catch((err)=>{});
+        scrape.scrapePage();
     });    
 })
 .catch((err)=>{

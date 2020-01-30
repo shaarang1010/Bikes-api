@@ -30,6 +30,13 @@ const bikeSchema = new Schema({
         required: true,
         trim: true
     },
+    subCategory:{
+        type: String,
+        index: true,
+        default: '',
+        required: true,
+        trim: true
+    },
     price: {
         type: Number,
         required: true,
@@ -64,9 +71,9 @@ bikeSchema.statics.getBikes = function(){
     })
 }
 
-/*bikeSchema.statics.upload = function(data){
+bikeSchema.statics.upload = function(data){
     return BikeList.insert(data, {ordered:false})
-}*/
+}
 
 
 module.exports = mongoose.model('BikeList', bikeSchema);
