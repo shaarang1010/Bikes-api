@@ -40,19 +40,15 @@ const scrapePage = async (arg, elem) =>{
             bikes.push(data);
         }
     }
-    console.log("BIKES -------------- ");
     //console.log(bikes.length);
     try{
+
+    /**Write Concern mongodb https://docs.mongodb.com/manual/reference/write-concern/ */
+    
     const result = await Bikes.insertMany(bikes,{ writeConcern: { w: 2, j: true, wtimeout: 5000 } });
     
     //console.log(bikes);
     console.log(result);
-    result.then(data=>{
-        console.log(data);
-    })
-    .catch(err=>{
-        console.log(err);
-    })
     }
     catch(err){
         console.log(err);
