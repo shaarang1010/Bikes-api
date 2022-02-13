@@ -1,6 +1,6 @@
 ## Bikes-API: WIP
 
-### A tool that scrapes webpages to search for bikes that a user can't afford
+### A tool that scrapes webpages to search for road, mountain and time trial bikses that a user can't afford
 
 It takes in couple of parameters from the user and then shows bikes above the calculated range
 
