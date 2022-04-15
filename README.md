@@ -1,4 +1,4 @@
-## A poor mans guide to buying a road bike-API: WIP
+## A poor mans guide to buying a road bike-API
 
 ### A tool that scrapes webpages to search for road, mountain and time trial bikses that a user can't afford
 
