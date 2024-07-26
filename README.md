@@ -12,4 +12,4 @@ It takes in couple of parameters from the user and then shows bikes above the ca
 2. npm install to install dependencies.
 
 ```
-__(Any recommendations or collaboration requests should be sent to shaarangtanpure@outlook.com.au)__
+__(Any recommendations or collaboration requests should be sent to dev10.shaarang@gmail.com)__
